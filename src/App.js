@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import MonsterContainer from './components/monster-container/MonsterContainer';
 
@@ -7,6 +6,7 @@ class App extends Component {
 
   state = {
     monsters: [],
+    searchField: '',
   };
 
   componentDidMount() {
@@ -16,24 +16,39 @@ class App extends Component {
       return this.setState({
         monsters: users
       })
-    }, console.log(this.state.users));
+    });
   };
 
-  createMonsters = () => {
-    const { monsters } = this.state;
-    return <MonsterContainer monsters={monsters} />;
+  // createMonsters = () => {
+  //   const { monsters } = this.state;
+  //   return <MonsterContainer monsters={monsters} />;
+  // };
+
+  handleChange = (e) => {
+    e.preventDefault();
+    this.setState({
+      searchField: e.target.value
+    }, () => console.log(this.state.searchField));
   };
 
   render() {
+
+    const { monsters, searchField } = this.state;
+    const filteredMonsters = monsters.filter(monster => {
+      return monster.name.toLowerCase().includes(searchField.toLowerCase())
+    });
+
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>{this.state.string}</code> and save to reload.
-          </p>
-          {this.createMonsters()}
-        </header>
+        <input
+          type="search"
+          placeholder="Search for a monster"
+          onChange={(e) => this.handleChange(e)}
+        />
+        {/*this.createMonsters()*/}
+        <MonsterContainer
+          monsters={filteredMonsters}
+        />
       </div>
     );
   };
