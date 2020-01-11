@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import MonsterContainer from './components/monster-container/MonsterContainer.component.jsx';
+import SearchBox from './components/search-box/SearchBox.component.jsx';
 import './App.css';
-import MonsterContainer from './components/monster-container/MonsterContainer';
 
 class App extends Component {
 
@@ -19,11 +20,6 @@ class App extends Component {
     });
   };
 
-  // createMonsters = () => {
-  //   const { monsters } = this.state;
-  //   return <MonsterContainer monsters={monsters} />;
-  // };
-
   handleChange = (e) => {
     e.preventDefault();
     this.setState({
@@ -34,18 +30,17 @@ class App extends Component {
   render() {
 
     const { monsters, searchField } = this.state;
+
     const filteredMonsters = monsters.filter(monster => {
       return monster.name.toLowerCase().includes(searchField.toLowerCase())
     });
 
     return (
       <div className="App">
-        <input
-          type="search"
-          placeholder="Search for a monster"
-          onChange={(e) => this.handleChange(e)}
+        <SearchBox
+          placeholder={"Search for monsters"}
+          handleChange={this.handleChange}
         />
-        {/*this.createMonsters()*/}
         <MonsterContainer
           monsters={filteredMonsters}
         />

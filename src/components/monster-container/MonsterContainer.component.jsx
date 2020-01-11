@@ -1,5 +1,5 @@
 import React from 'react';
-import MonsterCard from '../monster-card/MonsterCard';
+import MonsterCard from '../monster-card/MonsterCard.component.jsx';
 import './MonsterContainer.styles.css';
 
 const MonsterContainer = ({ monsters }) => {
