@@ -4,7 +4,7 @@ import './SearchBox.styles.css';
 const SearchBox = ({ placeholder, handleChange }) => {
   return (
     <input
-      className="search"
+      className="search-box"
       type="search"
       placeholder={placeholder}
       onChange={(e) => handleChange(e)}
